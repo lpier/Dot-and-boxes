@@ -55,6 +55,25 @@ public class Table {
 		return Math.max(k, Math.max(l, Math.max(m, n)));
 
 	}
+	
+	public void insertPlay(Play play) {
+		switch(play.pos) {
+		case "n":
+			this.Hedge[play.x][play.y] = play.T;
+			break;
+		case "s":
+			this.Hedge[play.x + 1][play.y] = play.T;
+			break;
+		case "e":
+			this.Vedge[play.x][play.y + 1] = play.T;
+			break;
+		case "o":
+			this.Vedge[play.x][play.y] = play.T;
+			break;
+		default:
+			break; 	
+		}
+	}
 
 	public void insertPlay(int x, int y, String P, int T) {
 		switch (P.trim().toLowerCase()) {
