@@ -1,6 +1,3 @@
-import java.util.*;
-import java.math.*;
-
 public class Table {
 	int i;
 	int j;
@@ -45,14 +42,13 @@ public class Table {
 	}
 
 	public void calcPosession() {
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
-				if(Hedge[i][j] * Hedge[i + 1][j] * Vedge[i][j] * Vedge[i][j + 1]>0) {
-				Cbox[i][j] = 2 * (mymax(Hedge[i][j], Hedge[i + 1][j], Vedge[i][j], Vedge[i][j + 1])% 2) - 1;
-				System.out.println(Cbox[i][j]);}
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
+				if (Hedge[i][j] * Hedge[i + 1][j] * Vedge[i][j] * Vedge[i][j + 1] > 0) {
+					Cbox[i][j] = 2 * (mymax(Hedge[i][j], Hedge[i + 1][j], Vedge[i][j], Vedge[i][j + 1]) % 2) - 1;
+				}
 			}
 		}
-		
 	}
 
 	public int mymax(int k, int l, int m, int n) {
@@ -75,15 +71,15 @@ public class Table {
 			this.Vedge[x][y] = T;
 			break;
 		default:
-			break;
+			break; 
 		}
 		this.calcPosession();
 	}
 
 	public int pointsP1() {
 		int p = 0;
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
 				if (this.Cbox[i][j] == 1) {
 					p++;
 				}
@@ -95,8 +91,8 @@ public class Table {
 
 	public int pointsP2() {
 		int p = 0;
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
 				if (this.Cbox[i][j] == -1) {
 					p++;
 				}
@@ -104,6 +100,33 @@ public class Table {
 		}
 
 		return p;
+	}
+
+	public boolean isEdgeFree(int x, int y, String pos) {
+		switch (pos.trim().toLowerCase()) {
+		case "n":
+			if (this.Hedge[x][y] == 0)
+				return true;
+			else
+				return false;
+		case "s":
+			if (this.Hedge[x + 1][y] == 0)
+				return true;
+			else
+				return false;
+		case "e":
+			if (this.Vedge[x][y + 1] == 0)
+				return true;
+			else
+				return false;
+		case "o":
+			if (this.Vedge[x][y] == 0)
+				return true;
+			else
+				return false;
+		default:
+			return false;
+		}
 	}
 
 	public void print() {
@@ -128,7 +151,7 @@ public class Table {
 			System.out.println();
 		}
 		for (int h = 0; h < this.j - 1; h++) {
-			if (this.Hedge[this.i-1][h] == 0) {
+			if (this.Hedge[this.i - 1][h] == 0) {
 				System.out.print(" --");
 			} else {
 				System.out.print(" ==");
