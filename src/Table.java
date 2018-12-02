@@ -1,6 +1,3 @@
-import java.util.*;
-import java.math.*;
-
 public class Table {
 	int i;
 	int j;
@@ -45,45 +42,44 @@ public class Table {
 	}
 
 	public void calcPosession() {
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
-				if(Hedge[i][j] * Hedge[i + 1][j] * Vedge[i][j] * Vedge[i][j + 1]>0) {
-				Cbox[i][j] = 2 * (mymax(Hedge[i][j], Hedge[i + 1][j], Vedge[i][j], Vedge[i][j + 1])% 2) - 1;
-				System.out.println(Cbox[i][j]);}
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
+				if (Hedge[i][j] * Hedge[i + 1][j] * Vedge[i][j] * Vedge[i][j + 1] > 0) {
+					Cbox[i][j] = 2 * (mymax(Hedge[i][j], Hedge[i + 1][j], Vedge[i][j], Vedge[i][j + 1]) % 2) - 1;
+				}
 			}
 		}
-		
 	}
 
 	public int mymax(int k, int l, int m, int n) {
 		return Math.max(k, Math.max(l, Math.max(m, n)));
 
 	}
-
-	public void insertPlay(int x, int y, String P, int T) {
-		switch (P.trim().toLowerCase()) {
+	
+	public void insertPlay(Play play) {
+		switch(play.pos) {
 		case "n":
-			this.Hedge[x][y] = T;
+			this.Hedge[play.x][play.y] = play.T;
 			break;
 		case "s":
-			this.Hedge[x + 1][y] = T;
+			this.Hedge[play.x + 1][play.y] = play.T;
 			break;
 		case "e":
-			this.Vedge[x][y + 1] = T;
+			this.Vedge[play.x][play.y + 1] = play.T;
 			break;
 		case "o":
-			this.Vedge[x][y] = T;
+			this.Vedge[play.x][play.y] = play.T;
 			break;
 		default:
-			break;
+			break; 	
 		}
 		this.calcPosession();
 	}
 
 	public int pointsP1() {
 		int p = 0;
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
 				if (this.Cbox[i][j] == 1) {
 					p++;
 				}
@@ -95,8 +91,8 @@ public class Table {
 
 	public int pointsP2() {
 		int p = 0;
-		for (int i = 0; i < this.i-1; i++) {
-			for (int j = 0; j < this.i-1; j++) {
+		for (int i = 0; i < this.i - 1; i++) {
+			for (int j = 0; j < this.i - 1; j++) {
 				if (this.Cbox[i][j] == -1) {
 					p++;
 				}
@@ -104,6 +100,33 @@ public class Table {
 		}
 
 		return p;
+	}
+
+	public boolean isEdgeFree(int x, int y, String pos) {
+		switch (pos.trim().toLowerCase()) {
+		case "n":
+			if (this.Hedge[x][y] == 0)
+				return true;
+			else
+				return false;
+		case "s":
+			if (this.Hedge[x + 1][y] == 0)
+				return true;
+			else
+				return false;
+		case "e":
+			if (this.Vedge[x][y + 1] == 0)
+				return true;
+			else
+				return false;
+		case "o":
+			if (this.Vedge[x][y] == 0)
+				return true;
+			else
+				return false;
+		default:
+			return false;
+		}
 	}
 
 	public void print() {
@@ -128,7 +151,7 @@ public class Table {
 			System.out.println();
 		}
 		for (int h = 0; h < this.j - 1; h++) {
-			if (this.Hedge[this.i-1][h] == 0) {
+			if (this.Hedge[this.i - 1][h] == 0) {
 				System.out.print(" --");
 			} else {
 				System.out.print(" ==");
