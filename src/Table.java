@@ -73,25 +73,6 @@ public class Table {
 		default:
 			break; 	
 		}
-	}
-
-	public void insertPlay(int x, int y, String P, int T) {
-		switch (P.trim().toLowerCase()) {
-		case "n":
-			this.Hedge[x][y] = T;
-			break;
-		case "s":
-			this.Hedge[x + 1][y] = T;
-			break;
-		case "e":
-			this.Vedge[x][y + 1] = T;
-			break;
-		case "o":
-			this.Vedge[x][y] = T;
-			break;
-		default:
-			break; 
-		}
 		this.calcPosession();
 	}
 

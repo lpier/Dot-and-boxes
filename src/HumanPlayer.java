@@ -13,8 +13,7 @@ public class HumanPlayer extends Player {
 		System.out.print("Ingresa la ORIENTACION del PALO: ");
 		P = scanner.nextLine();
 
-		tablero.insertPlay(X, Y, P, T);
-
+		tablero.insertPlay(new Play(X, Y, P, T));
 	}
 	
 }

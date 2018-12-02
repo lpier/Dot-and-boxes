@@ -9,13 +9,13 @@ public class RandomPlayer extends Player {
 		int x, y;
 		String pos;
 		do {
-			x = random.nextInt(rows - 1) + 0;
-			y = random.nextInt(columns - 1) + 0;
+			x = random.nextInt(5 - 1) + 0;
+			y = random.nextInt(5 - 1) + 0;
 			String positions = "nseo";
 			pos = String.valueOf(positions.charAt(random.nextInt(4)));
 		} while (tablero.isEdgeFree(x, y, pos) == false);
 		System.out.println("row " + x + " | column " + y + " | pos " + pos);
-		tablero.insertPlay(x, y, pos, T);
+		tablero.insertPlay(new Play(x, y, pos, T));
 	}
 
 }
