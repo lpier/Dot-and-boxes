@@ -31,7 +31,6 @@ public class Minimax {
 
 				moves = currentBoard.getMoves();
 				Collections.shuffle(moves);
-
 				for (Edge e : moves) {
 					Table child = currentBoard.getUpdated(e, currentPlayer);
 					int newScore = child.getScore(currentPlayer);
@@ -66,35 +65,41 @@ public class Minimax {
 				continue;
 			}
 
-			if (parentNode.getPlayer() == player && parentNode.getParent() == null) { // nodo cuelga del raiz
-				System.out.println("POR QUÉ ME COPIAS");
-				System.out.println(parentNode.getPlayer() + " - " + currentNode.getPlayer());
-				System.out.println(player);
-				System.out.println(currentNode.getEdge());
-				rootNode.setEdge(currentNode.getEdge());
-				// rootNode.setEdge(parentNode.getEdge());
-
-				continue;
-			} else {
-				if (parentNode.getUtility() > currentUtility) {
-					parentNode.setUtility(currentUtility);
-				}
+			if (parentNode.getPlayer() == player && parentNode.getUtility() <= currentUtility) {
+				parentNode.setUtility(currentUtility);
+			}else if(parentNode.getPlayer() != player && parentNode.getUtility() > currentUtility) {
+				parentNode.setUtility(currentUtility);
 			}
-
-//			if (parentNode.getPlayer() == player) {
-//				if (parentNode.getUtility() < currentUtility) {
-//					parentNode.setUtility(currentUtility);
-//					if (parentNode.equals(rootNode)) {
-//						rootNode.setEdge(currentNode.getEdge());
-//					}
-//				}
+			
+			if(parentNode.getPlayer() == player && parentNode.isRoot()) {
+				rootNode.setEdge(currentNode.getEdge());
+			}
+			
+//			if (parentNode.getPlayer() == player && parentNode.getParent() == null) { // nodo cuelga del raiz
+//				rootNode.setEdge(currentNode.getEdge());
+//				continue;
 //			} else {
 //				if (parentNode.getUtility() > currentUtility) {
 //					parentNode.setUtility(currentUtility);
 //				}
 //			}
+
+//			if (parentNode.getPlayer() == player) {
+//				if (parentNode.getUtility() < currentUtility) {
+//					parentNode.setUtility(currentUtility);
+//					System.out.println(parentNode.getParent()==null);
+//					if(parentNode.isRoot()) {
+//						System.out.println("no entra aqui?");
+//						rootNode.setEdge(currentNode.getEdge());
+//					}
+//				}
+//			} else {
+//				if(parentNode.getUtility() > currentUtility) {
+//					parentNode.setUtility(currentUtility);
+//				}
+//			}
+
 		} while (!stack.isEmpty());
-		System.out.println(rootNode);
 		return rootNode.getEdge();
 	}
 
@@ -103,7 +108,7 @@ public class Minimax {
 		int value;
 		if (player == Util.PLAYER1) {
 			// value = cScore * table.getPointsP1() - cScore * table.getPointsP1();
-			value = table.getPointsP1() - table.getPointsP1();
+			value = table.getPointsP1() - table.getPointsP2();
 		} else {
 			value = table.getPointsP2() - table.getPointsP1();
 			// value = cScore * table.getPointsP2() - cScore * table.getPointsP1();

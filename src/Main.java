@@ -15,13 +15,11 @@ public class Main {
 
 		Scanner scanner = new Scanner(System.in);
 		selectMode(scanner);
+		tablero.print();
 
 		do {
-
-			tablero.print();
 			System.out.println();
-			System.out.println("Puntuacion del jugador 1: " + tablero.getPointsP1());
-			System.out.println("Puntuacion del jugador 2: " + tablero.getPointsP2());
+			System.out.println();
 			System.out.println("Turno del jugador " + getPlayer(T));
 
 			if (getPlayer(T) == 1) {
@@ -43,6 +41,9 @@ public class Main {
 					points2 = tablero.getPointsP2();
 				}	
 			}
+			tablero.print();
+			marcador(tablero);
+
 			if(tablero.isFinished()) {
 				showWinner(tablero.getWinner());
 			}
@@ -69,7 +70,7 @@ public class Main {
 			System.out.println(" (1) Agente aleatorio");
 			System.out.println(" (2) Agente inteligente");
 			modo = modo * 10 + Integer.parseInt(scanner.nextLine());
-		}else {
+		} else {
 			System.out.println(" (1) Random vs Random");
 			System.out.println(" (2) Random vs Inteligente");
 			modo = modo * 10 + Integer.parseInt(scanner.nextLine());
@@ -99,13 +100,21 @@ public class Main {
 		}
 
 	}
-	
+
+	public static void marcador(Table tablero) {
+		System.out.println("\n" + 
+				  "+-----------------------\n" 
+				+ "| jugador 1 : " + tablero.getPointsP1() + "\n"
+				+ "| jugador 2 : " 	+ tablero.getPointsP2() + "\n" 
+				+ "+-----------------------\n");
+	}
+
 	public static void showWinner(int winner) {
-		switch(winner) {
+		switch (winner) {
 		case 1:
 			System.out.println("gano el 1");
 			break;
-		case 2: 
+		case 2:
 			System.out.println("gano el 2");
 			break;
 		case 0:

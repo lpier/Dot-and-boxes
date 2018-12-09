@@ -37,7 +37,6 @@ public class Edge {
 
 	@Override
 	public String toString() {
-		// String coords = String.format("(%i,%i)", x,y);
 		return ((horizontal ? "H " : "V ") + "(" + x + "," + y + ")	");
 	}
 

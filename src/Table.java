@@ -86,7 +86,7 @@ public class Table {
 	}
 
 	public boolean isFinished() {
-		return (pointsPlayer1 + pointsPlayer2) == (rows * columns);
+		return (pointsPlayer1 + pointsPlayer2) == (rows -1) * (columns-1);
 	}
 
 	public int getWinner() {
@@ -135,34 +135,17 @@ public class Table {
 		}
 	}
 
-	public boolean isEdgeFree(Edge edge) {
-		if (edge.isHorizontal()) {
-			if (this.Hedge[edge.getX()][edge.getY()] == 0) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			if (this.Hedge[edge.getX()][edge.getY()] == 0) {
-				return true;
-			} else {
-				return false;
-			}
-
-		}
-	}
-
 	public ArrayList<Edge> getMoves() {
 		ArrayList<Edge> freeEdges = new ArrayList<Edge>();
 		for (int i = 0; i < this.rows; i++) {
 			for (int j = 0; j < (this.columns - 1); j++) {
-				if (Hedge[i][j] != 0)
+				if (Hedge[i][j] == 0)
 					freeEdges.add(new Edge(i, j, true));
 			}
 		}
 		for (int i = 0; i < (this.rows - 1); i++) {
 			for (int j = 0; j < this.columns; j++) {
-				if (Vedge[i][j] != 0)
+				if (Vedge[i][j] == 0)
 					freeEdges.add(new Edge(i, j, false));
 			}
 		}

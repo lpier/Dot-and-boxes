@@ -57,12 +57,15 @@ public class Node {
 				+ this.edge;
 	}
 
+	public boolean isRoot() {
+		return (this.getParent() == null);
+	}
+	
 	public boolean equals(Node other) {
 		if (this.table.equals(other.table)) {
 			return true;
 		} else
 			return false;
-		// return (this.table.equals(other.table) && this.player==other.player);
 	}
 
 }
