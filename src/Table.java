@@ -1,49 +1,50 @@
+import java.util.ArrayList;
+
 public class Table {
-	int i;
-	int j;
+	int rows;
+	int columns;
 	int[][] Hedge;
 	int[][] Vedge;
 	int[][] Cbox;
+	int pointsPlayer1;
+	int pointsPlayer2;
 
-	public Table(int i, int j, int[][] hedge, int[][] vedge, int[][] cbox) {
+	public Table(int rows, int columns, int[][] hedge, int[][] vedge, int[][] cbox) {
 		super();
-		this.i = i;
-		this.j = j;
+		this.rows = rows;
+		this.columns = columns;
 		Hedge = hedge;
 		Vedge = vedge;
 		Cbox = cbox;
 	}
 
-	public Table(int i, int j) {
+	public Table(int rows, int columns) {
 		super();
-		this.i = i;
-		this.j = j;
-		Hedge = new int[i][j - 1];
-		Vedge = new int[i - 1][j];
-		Cbox = new int[i - 1][j - 1];
-		for (int x = 0; x < i - 1; x++) {
-			for (int y = 0; y < j - 1; y++) {
-				Cbox[x][y] = 0;
-			}
+		this.rows = rows;
+		this.columns = columns;
+		Hedge = new int[rows][columns - 1];
+		Vedge = new int[rows - 1][columns];
+		Cbox = new int[rows - 1][columns - 1];
+		init(Hedge);
+		init(Vedge);
+		init(Cbox);
+		pointsPlayer1 = 0;
+		pointsPlayer2 = 0;
 
-		}
-		for (int x = 0; x < i; x++) {
-			for (int y = 0; y < j - 1; y++) {
-				Hedge[x][y] = 0;
-			}
+	}
 
-		}
-		for (int x = 0; x < i - 1; x++) {
-			for (int y = 0; y < j; y++) {
-				Vedge[x][y] = 0;
+	public void init(int[][] arrayToFill) {
+		for (int x = 0; x < rows - 1; x++) {
+			for (int y = 0; y < columns - 1; y++) {
+				arrayToFill[x][y] = 0;
 			}
 
 		}
 	}
 
 	public void calcPosession() {
-		for (int i = 0; i < this.i - 1; i++) {
-			for (int j = 0; j < this.i - 1; j++) {
+		for (int i = 0; i < this.rows - 1; i++) {
+			for (int j = 0; j < this.rows - 1; j++) {
 				if (Hedge[i][j] * Hedge[i + 1][j] * Vedge[i][j] * Vedge[i][j + 1] > 0) {
 					Cbox[i][j] = 2 * (mymax(Hedge[i][j], Hedge[i + 1][j], Vedge[i][j], Vedge[i][j + 1]) % 2) - 1;
 				}
@@ -55,51 +56,56 @@ public class Table {
 		return Math.max(k, Math.max(l, Math.max(m, n)));
 
 	}
-	
+
 	public void insertPlay(Play play) {
-		switch(play.pos) {
+		switch (play.pos) {
 		case "n":
-			this.Hedge[play.x][play.y] = play.T;
+			this.Hedge[play.getX()][play.getY()] = play.getT();
 			break;
 		case "s":
-			this.Hedge[play.x + 1][play.y] = play.T;
+			this.Hedge[play.getX() + 1][play.getY()] = play.getT();
 			break;
 		case "e":
-			this.Vedge[play.x][play.y + 1] = play.T;
+			this.Vedge[play.getX()][play.getY() + 1] = play.getT();
 			break;
 		case "o":
-			this.Vedge[play.x][play.y] = play.T;
+			this.Vedge[play.getX()][play.getY()] = play.getT();
 			break;
 		default:
-			break; 	
+			break;
 		}
 		this.calcPosession();
 	}
 
-	public int pointsP1() {
-		int p = 0;
-		for (int i = 0; i < this.i - 1; i++) {
-			for (int j = 0; j < this.i - 1; j++) {
-				if (this.Cbox[i][j] == 1) {
-					p++;
-				}
-			}
-		}
-
-		return p;
+	public void insertPlayAsAgent(int x, int y, boolean horizontal, int T) {
+		if (horizontal)
+			this.Hedge[x][y] = T;
+		else
+			this.Vedge[x][y] = T;
+		this.calcPosession();
 	}
 
-	public int pointsP2() {
-		int p = 0;
-		for (int i = 0; i < this.i - 1; i++) {
-			for (int j = 0; j < this.i - 1; j++) {
-				if (this.Cbox[i][j] == -1) {
-					p++;
-				}
-			}
-		}
+	public boolean isFinished() {
+		return (pointsPlayer1 + pointsPlayer2) == (rows * columns);
+	}
 
-		return p;
+	public int getWinner() {
+		if (pointsPlayer1 > pointsPlayer2)
+			return 1;
+		else if (pointsPlayer1 < pointsPlayer2)
+			return 2;
+		else
+			return 0;
+	}
+
+	public int getPointsP1() {
+		pointsPlayer1 = this.getScore(1);
+		return pointsPlayer1;
+	}
+
+	public int getPointsP2() {
+		pointsPlayer2 = this.getScore(2);
+		return pointsPlayer2;
 	}
 
 	public boolean isEdgeFree(int x, int y, String pos) {
@@ -129,10 +135,82 @@ public class Table {
 		}
 	}
 
-	public void print() {
+	public boolean isEdgeFree(Edge edge) {
+		if (edge.isHorizontal()) {
+			if (this.Hedge[edge.getX()][edge.getY()] == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (this.Hedge[edge.getX()][edge.getY()] == 0) {
+				return true;
+			} else {
+				return false;
+			}
 
-		for (int i = 0; i < this.i - 1; i++) {
-			for (int h = 0; h < this.j - 1; h++) {
+		}
+	}
+
+	public ArrayList<Edge> getMoves() {
+		ArrayList<Edge> freeEdges = new ArrayList<Edge>();
+		for (int i = 0; i < this.rows; i++) {
+			for (int j = 0; j < (this.columns - 1); j++) {
+				if (Hedge[i][j] != 0)
+					freeEdges.add(new Edge(i, j, true));
+			}
+		}
+		for (int i = 0; i < (this.rows - 1); i++) {
+			for (int j = 0; j < this.columns; j++) {
+				if (Vedge[i][j] != 0)
+					freeEdges.add(new Edge(i, j, false));
+			}
+		}
+		return freeEdges;
+	}
+
+	public Table getUpdated(Edge edge, int player) {
+		Table newTable = new Table(rows, columns);
+
+		// TODO: refactor
+		for (int i = 0; i < this.rows; i++)
+			for (int j = 0; j < (this.columns - 1); j++)
+				newTable.Hedge[i][j] = Hedge[i][j];
+		for (int i = 0; i < (this.rows - 1); i++)
+			for (int j = 0; j < this.columns; j++)
+				newTable.Vedge[i][j] = Vedge[i][j];
+		for (int i = 0; i < (rows - 1); i++)
+			for (int j = 0; j < (columns - 1); j++)
+				newTable.Cbox[i][j] = Cbox[i][j];
+
+		if (edge.isHorizontal())
+			newTable.Hedge[edge.getX()][edge.getY()] = 10000;
+		else
+			newTable.Vedge[edge.getX()][edge.getY()] = 10000;
+		newTable.calcPosession();
+		newTable.getPointsP1();
+		newTable.getPointsP2();
+		return newTable;
+	}
+
+	public int getScore(int player) {
+		int player_id = player == 1 ? 1 : -1;
+
+		int p = 0;
+		for (int i = 0; i < this.rows - 1; i++) {
+			for (int j = 0; j < this.rows - 1; j++) {
+				if (this.Cbox[i][j] == player_id) {
+					p++;
+				}
+			}
+		}
+		return p;
+
+	}
+
+	public void print() {
+		for (int i = 0; i < this.rows - 1; i++) {
+			for (int h = 0; h < this.columns - 1; h++) {
 				if (this.Hedge[i][h] == 0) {
 					System.out.print(" --");
 				} else {
@@ -140,7 +218,7 @@ public class Table {
 				}
 			}
 			System.out.println();
-			for (int h = 0; h < this.j; h++) {
+			for (int h = 0; h < this.columns; h++) {
 				if (this.Vedge[i][h] == 0) {
 					System.out.print("|  ");
 				} else {
@@ -150,13 +228,31 @@ public class Table {
 			}
 			System.out.println();
 		}
-		for (int h = 0; h < this.j - 1; h++) {
-			if (this.Hedge[this.i - 1][h] == 0) {
+		for (int h = 0; h < this.columns - 1; h++) {
+			if (this.Hedge[this.rows - 1][h] == 0) {
 				System.out.print(" --");
 			} else {
 				System.out.print(" ==");
 			}
 		}
+	}
 
+	public boolean equals(Table o) {
+		for (int i = 0; i < this.rows; i++)
+			for (int j = 0; j < (this.columns - 1); j++)
+				if (this.Hedge[i][j] != o.Hedge[i][j]) {
+					return false;
+				}
+		for (int i = 0; i < (this.rows - 1); i++)
+			for (int j = 0; j < this.columns; j++)
+				if (this.Vedge[i][j] != o.Vedge[i][j]) {
+					return false;
+				}
+		for (int i = 0; i < (rows - 1); i++)
+			for (int j = 0; j < (columns - 1); j++)
+				if (this.Cbox[i][j] != o.Cbox[i][j]) {
+					return false;
+				}
+		return true;
 	}
 }

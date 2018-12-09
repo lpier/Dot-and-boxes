@@ -20,31 +20,34 @@ public class Main {
 
 			tablero.print();
 			System.out.println();
-			System.out.println("Puntuacion del jugador 1: " + tablero.pointsP1());
-			System.out.println("Puntuacion del jugador 2: " + tablero.pointsP2());
+			System.out.println("Puntuacion del jugador 1: " + tablero.getPointsP1());
+			System.out.println("Puntuacion del jugador 2: " + tablero.getPointsP2());
 			System.out.println("Turno del jugador " + getPlayer(T));
 
 			if (getPlayer(T) == 1) {
 				player1.makePlay(scanner, tablero, T);
-				int auxP1 = tablero.pointsP1();
+				int auxP1 = tablero.getPointsP1();
 				if (points1 == auxP1) {
 					T++;
 				} else {
 					T = T + 2;
-					points1 = tablero.pointsP1();
+					points1 = tablero.getPointsP1();
 				}
 			} else {
 				player2.makePlay(scanner, tablero, T);
-				int auxP2 = tablero.pointsP2();
+				int auxP2 = tablero.getPointsP2();
 				if (points2 == auxP2) {
 					T++;
 				} else {
 					T = T + 2;
-					points2 = tablero.pointsP2();
+					points2 = tablero.getPointsP2();
 				}	
 			}
+			if(tablero.isFinished()) {
+				showWinner(tablero.getWinner());
+			}
+		} while (!tablero.isFinished());
 
-		} while (points1 + points2 < tablero.i * tablero.j);
 		scanner.close();
 	}
 
@@ -66,6 +69,10 @@ public class Main {
 			System.out.println(" (1) Agente aleatorio");
 			System.out.println(" (2) Agente inteligente");
 			modo = modo * 10 + Integer.parseInt(scanner.nextLine());
+		}else {
+			System.out.println(" (1) Random vs Random");
+			System.out.println(" (2) Random vs Inteligente");
+			modo = modo * 10 + Integer.parseInt(scanner.nextLine());
 		}
 
 		switch (modo) {
@@ -77,9 +84,13 @@ public class Main {
 			player1 = new HumanPlayer();
 			player2 = new AgentPlayer();
 			break;
-		case 2:
+		case 21:
 			player1 = new RandomPlayer();
 			player2 = new RandomPlayer();
+			break;
+		case 22:
+			player1 = new RandomPlayer();
+			player2 = new AgentPlayer();
 			break;
 		default:
 			player1 = new RandomPlayer();
@@ -87,6 +98,22 @@ public class Main {
 			break;
 		}
 
+	}
+	
+	public static void showWinner(int winner) {
+		switch(winner) {
+		case 1:
+			System.out.println("gano el 1");
+			break;
+		case 2: 
+			System.out.println("gano el 2");
+			break;
+		case 0:
+			System.out.println("empate");
+			break;
+		default:
+			break;
+		}
 	}
 
 }
