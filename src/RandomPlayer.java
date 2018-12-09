@@ -10,7 +10,7 @@ public class RandomPlayer extends Player {
 		String pos;
 		do {
 			x = random.nextInt(5 - 1) + 0;
-			y = random.nextInt(5 - 1) + 0;
+			y = random.nextInt(5- 1) + 0;
 			String positions = "nseo";
 			pos = String.valueOf(positions.charAt(random.nextInt(4)));
 		} while (tablero.isEdgeFree(x, y, pos) == false);
