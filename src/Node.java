@@ -68,7 +68,7 @@ public class Node {
     	children.add(node);
 	}
 	
-	public void calcUtility(){ // TODO: arg isMaxPlayer?? 
+	public void calcUtility(){ 
 		int utility;
 		if (this.getPlayer() == 1) {
 			utility = this.getCurrentBoard().getPointsP1() - this.getCurrentBoard().getPointsP2();

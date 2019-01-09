@@ -21,7 +21,6 @@ public class Minimax {
 			parentNode.addChild(newNode);
 			if (newNode.getCurrentBoard().getMoves().isEmpty() == false && (System.nanoTime() - begin) < timeout) {
 				constructTree(newNode, begin);
-			}else {
 			}
 		});
 	}
