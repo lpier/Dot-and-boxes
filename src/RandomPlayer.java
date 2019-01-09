@@ -13,8 +13,8 @@ public class RandomPlayer extends Player {
 			y = random.nextInt(5- 1) + 0;
 			String positions = "nseo";
 			pos = String.valueOf(positions.charAt(random.nextInt(4)));
-		} while (tablero.isEdgeFree(x, y, pos) == false);
-		System.out.println("row " + x + " | column " + y + " | pos " + pos);
+		} while (tablero.isEdgeFree(x, y, pos) == false);		
+		System.out.println("random play: " + "row " + x + " | column " + y + " | pos " + pos);
 		tablero.insertPlay(new Play(x, y, pos, T));
 	}
 
