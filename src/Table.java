@@ -155,7 +155,6 @@ public class Table {
 	public Table getUpdated(Edge edge, int player) {
 		Table newTable = new Table(rows, columns);
 
-		// TODO: refactor
 		for (int i = 0; i < this.rows; i++)
 			for (int j = 0; j < (this.columns - 1); j++)
 				newTable.Hedge[i][j] = Hedge[i][j];
