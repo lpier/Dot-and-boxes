@@ -92,7 +92,7 @@ public class HumanVsIntelligent3X3 extends AppCompatActivity {
         Button buttonIntelligent = (Button) findViewById(intelligentButtonId);
         buttonIntelligent.setBackgroundColor(Color.RED);
 
-        this.table.insertPlayAsAgent(edge.getX(), edge.getY(), edge.isHorizontal(), T);;
+        this.table.insertPlay(edge.getX(), edge.getY(), edge.isHorizontal(), T);;
 
         int aux2 = this.table.getPointsP2();
         if (this.points2 == aux2){

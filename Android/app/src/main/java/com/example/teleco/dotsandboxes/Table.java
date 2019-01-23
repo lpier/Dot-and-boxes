@@ -79,7 +79,7 @@ public class Table {
 		this.calcPosession();
 	}
 
-	public void insertPlayAsAgent(int x, int y, boolean horizontal, int T) {
+	public void insertPlay(int x, int y, boolean horizontal, int T) {
 		if (horizontal)
 			this.Hedge[x][y] = T;
 		else
@@ -108,6 +108,13 @@ public class Table {
 	public int getPointsP2() {
 		pointsPlayer2 = this.getScore(2);
 		return pointsPlayer2;
+	}
+
+	public boolean isEdgeFree(Edge edge) {
+		if(edge.isHorizontal())
+			return (Hedge[edge.getX()][edge.getY()] == 0);
+		else
+			return (Vedge[edge.getX()][edge.getY()] == 0);
 	}
 
 	public boolean isEdgeFree(int x, int y, String pos) {
@@ -240,3 +247,4 @@ public class Table {
 		return true;
 	}
 }
+

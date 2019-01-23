@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -17,7 +18,6 @@ public class HumanVsRandom extends AppCompatActivity {
     int points1 = 0;
     int points2 = 0;
     HumanPlayer player1 = new HumanPlayer();
-    RandomPlayer player2 = new RandomPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class HumanVsRandom extends AppCompatActivity {
 
     public void onStart()
     {
-        table = new Table(5,5);
+        table = new Table(4,4);
         super.onStart();
         TextView player1Points = (TextView) findViewById(R.id.player1Points);
         TextView player2Points = (TextView) findViewById(R.id.player2Points);
@@ -40,40 +40,35 @@ public class HumanVsRandom extends AppCompatActivity {
         int buttonId = view.getId();
         Button button =  (Button) findViewById(buttonId);
         TextView player1Points = (TextView) findViewById(R.id.player1Points);
-        TextView player2Points = (TextView) findViewById(R.id.player2Points);
 
+        String moveString = view.getTag().toString();
+        String[] move;
+        String comma = ",";
+        move = moveString.split(comma);
 
         if (getPlayer(this.T) == 1) {
-            button.setBackgroundColor(Color.GREEN);
-            String moveString = view.getTag().toString();
-            String[] move;
-            String comma = ",";
-            move = moveString.split(comma);
-            Play play = new Play(Integer.parseInt(move[0]), Integer.parseInt(move[1]), move[2], this.T);
-            this.table.insertPlay(play);
-            int aux1 = this.table.getPointsP1();
-            if (this.points1 == aux1){
-                this.T++;
-            } else {
-                this.T = T + 2;
-                this.points1 = aux1;
-            }
-            player1Points.setText(Integer.toString(aux1));
+            if (this.table.isEdgeFree(Integer.valueOf(move[0]), Integer.valueOf(move[1]), move[2])) {
+                button.setBackgroundColor(Color.GREEN);
 
-            if(this.table.isFinished()) {
-
-                Intent i = new Intent(getApplicationContext(), Results.class);
-                i.putExtra("points1", Integer.toString(1));
-                i.putExtra("points2", Integer.toString(this.points2));
-                startActivity(i);
-            } else {
-                randomTurn();
+                Play play = new Play(Integer.parseInt(move[0]), Integer.parseInt(move[1]), move[2], this.T);
+                this.table.insertPlay(play);
+                int aux1 = this.table.getPointsP1();
+                if (this.points1 == aux1){
+                    this.T++;
+                    randomTurn();
+                } else {
+                    this.T = T + 2;
+                    this.points1 = aux1;
+                    updatePointsBox(1);
+                }
+                player1Points.setText(Integer.toString(aux1));
             }
         }
-        if(this.table.isFinished()) {
+
+        if (this.table.isFinished()) {
 
             Intent i = new Intent(getApplicationContext(), Results.class);
-            i.putExtra("points1", Integer.toString(1));
+            i.putExtra("points1", Integer.toString(this.points1));
             i.putExtra("points2", Integer.toString(this.points2));
             startActivity(i);
         }
@@ -87,32 +82,110 @@ public class HumanVsRandom extends AppCompatActivity {
         }
     }
 
+    private void updatePointsBox(int playerId) {
+        int player_id = playerId;
+        String pointIdString;
+        int pointId;
+        ImageView point;
+        int p = 0;
+        for (int i = 0; i < this.table.rows - 1; i++) {
+            for (int j = 0; j < this.table.rows - 1; j++) {
+                if (this.table.Cbox[i][j] == player_id) {
+                    pointIdString = getPointId(i,j);
+                    pointId = getApplicationContext().getResources().getIdentifier(pointIdString, "id", getApplicationContext().getPackageName());
+                    point = (ImageView) findViewById(pointId);
+                    if (player_id == 1) {
+                        point.setColorFilter(Color.GREEN);
+                        point.setVisibility(View.VISIBLE);
+                    } else {
+                        point.setColorFilter(Color.RED);
+                        point.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        }
+    }
+
+    private String getPointId(int x, int y){
+        if (x == 0 && y == 0) {
+            return "point1";
+        }
+        if (x == 0 && y == 1) {
+            return "point2";
+        }
+        if (x == 0 && y == 2) {
+            return "point3";
+        }
+        if (x == 1 && y == 0) {
+            return "point4";
+        }
+        if (x == 1 && y == 1) {
+            return "point5";
+        }
+        if (x == 1 && y == 2) {
+            return "point6";
+        }
+        if (x == 2 && y == 0) {
+            return "point7";
+        }
+        if (x == 2 && y == 1) {
+            return "point8";
+        }
+        if (x == 2 && y == 2) {
+            return "point9";
+        }
+        return "unknown";
+    }
+
+
     private void randomTurn() {
+        TextView player2Points = (TextView) findViewById(R.id.player2Points);
+
         Random random = new Random();
         int x, y;
         String pos;
+        Edge edge = new Edge();
         do {
-            x = random.nextInt(5 - 1) + 0;
-            y = random.nextInt(5 - 1) + 0;
-            String positions = "nseo";
-            pos = String.valueOf(positions.charAt(random.nextInt(4)));
-        } while (!this.table.isEdgeFree(x, y, pos));
+            boolean horizontal = random.nextBoolean();
+            if(horizontal) {
+                x = random.nextInt(3 - 0 + 1) + 0;
+                y = random.nextInt(2 - 0 + 1) + 0;
+            }else {
+                x = random.nextInt(2 - 0 + 1) + 0;
+                y = random.nextInt(3 - 0 + 1) + 0;
+            }
+            edge.setHorizontal(horizontal);
+            edge.setX(x);
+            edge.setY(y);
 
+        } while (this.table.isEdgeFree(edge) == false);
+
+        String moveRandom = edge.toString();
         MapeButtons mapping = new MapeButtons();
-        String randomButtonIdString = mapping.getIdButton(Integer.toString(x) + "," + Integer.toString(y) + "," + pos);
-        int randomButtonId = getApplicationContext().getResources().getIdentifier(randomButtonIdString, "id", getApplicationContext().getPackageName());
-        Button buttonTest = (Button) findViewById(randomButtonId);
-        buttonTest.setBackgroundColor(Color.RED);
+        String buttonIdString = mapping.getIdButton(moveRandom);
+        int randomButtonId = getApplicationContext().getResources().getIdentifier(buttonIdString, "id", getApplicationContext().getPackageName());
+        Button randomButton = (Button) findViewById(randomButtonId);
+        randomButton.setBackgroundColor(Color.RED);
 
-        Play play = new Play(x, y, pos, this.T);
-        this.table.insertPlay(play);
-        int aux2 = this.table.getPointsP1();
+        this.table.insertPlay(edge.getX(), edge.getY(), edge.isHorizontal(), T);;
+
+        int aux2 = this.table.getPointsP2();
         if (this.points2 == aux2){
             this.T++;
+
         } else {
             this.T = T + 2;
             this.points2 = aux2;
-            randomTurn();
+            player2Points.setText(Integer.toString(aux2));
+            updatePointsBox(-1);
+            if(this.table.isFinished()) {
+                Intent i = new Intent(getApplicationContext(), Results.class);
+                i.putExtra("points1", Integer.toString(this.points1));
+                i.putExtra("points2", Integer.toString(this.points2));
+                startActivity(i);
+            } else {
+                randomTurn();
+            }
         }
     }
 }

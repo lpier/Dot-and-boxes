@@ -16,7 +16,6 @@ public class MainActivityHumanVsIntelligent extends AppCompatActivity {
     int points1 = 0;
     int points2 = 0;
     HumanPlayer player1 = new HumanPlayer();
-    AgentPlayer player2 = new AgentPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +155,7 @@ public class MainActivityHumanVsIntelligent extends AppCompatActivity {
         Button buttonIntelligent = (Button) findViewById(intelligentButtonId);
         buttonIntelligent.setBackgroundColor(Color.RED);
 
-        this.table.insertPlayAsAgent(edge.getX(), edge.getY(), edge.isHorizontal(), T);;
+        this.table.insertPlay(edge.getX(), edge.getY(), edge.isHorizontal(), T);;
 
         int aux2 = this.table.getPointsP2();
         if (this.points2 == aux2){

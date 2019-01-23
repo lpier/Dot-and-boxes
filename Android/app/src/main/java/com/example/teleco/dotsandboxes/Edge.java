@@ -1,5 +1,6 @@
 package com.example.teleco.dotsandboxes;
 
+
 public class Edge {
 
 	private int x, y;
@@ -10,6 +11,9 @@ public class Edge {
 		this.x = x;
 		this.y = y;
 		this.horizontal = horizontal;
+	}
+
+	public Edge() {
 	}
 
 	public int getX() {
