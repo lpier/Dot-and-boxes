@@ -61,20 +61,20 @@ public class Table {
 
 	public void insertPlay(Play play) {
 		switch (play.pos) {
-		case "n":
-			this.Hedge[play.getX()][play.getY()] = play.getT();
-			break;
-		case "s":
-			this.Hedge[play.getX() + 1][play.getY()] = play.getT();
-			break;
-		case "e":
-			this.Vedge[play.getX()][play.getY() + 1] = play.getT();
-			break;
-		case "o":
-			this.Vedge[play.getX()][play.getY()] = play.getT();
-			break;
-		default:
-			break;
+			case "n":
+				this.Hedge[play.getX()][play.getY()] = play.getT();
+				break;
+			case "s":
+				this.Hedge[play.getX() + 1][play.getY()] = play.getT();
+				break;
+			case "e":
+				this.Vedge[play.getX()][play.getY() + 1] = play.getT();
+				break;
+			case "o":
+				this.Vedge[play.getX()][play.getY()] = play.getT();
+				break;
+			default:
+				break;
 		}
 		this.calcPosession();
 	}
@@ -112,28 +112,28 @@ public class Table {
 
 	public boolean isEdgeFree(int x, int y, String pos) {
 		switch (pos.trim().toLowerCase()) {
-		case "n":
-			if (this.Hedge[x][y] == 0)
-				return true;
-			else
+			case "n":
+				if (this.Hedge[x][y] == 0)
+					return true;
+				else
+					return false;
+			case "s":
+				if (this.Hedge[x + 1][y] == 0)
+					return true;
+				else
+					return false;
+			case "e":
+				if (this.Vedge[x][y + 1] == 0)
+					return true;
+				else
+					return false;
+			case "o":
+				if (this.Vedge[x][y] == 0)
+					return true;
+				else
+					return false;
+			default:
 				return false;
-		case "s":
-			if (this.Hedge[x + 1][y] == 0)
-				return true;
-			else
-				return false;
-		case "e":
-			if (this.Vedge[x][y + 1] == 0)
-				return true;
-			else
-				return false;
-		case "o":
-			if (this.Vedge[x][y] == 0)
-				return true;
-			else
-				return false;
-		default:
-			return false;
 		}
 	}
 
@@ -157,7 +157,6 @@ public class Table {
 	public Table getUpdated(Edge edge, int player) {
 		Table newTable = new Table(rows, columns);
 
-		// TODO: refactor
 		for (int i = 0; i < this.rows; i++)
 			for (int j = 0; j < (this.columns - 1); j++)
 				newTable.Hedge[i][j] = Hedge[i][j];

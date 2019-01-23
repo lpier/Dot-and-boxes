@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".HumanVsIntelligent3X3"
+    tools:showIn="@layout/activity_human_vs_intelligent3_x3">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="302dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/app_name"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="30dp"
+            android:text="@string/player1_points"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/player1Points"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp"
+            android:text="@string/player2_points"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/player2Points"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273">
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/dot" />
+
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,0,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,1,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,2,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.021">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="35dp"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,0,o" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,0,e" />
+
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,1,e" />
+
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="0,2,e" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424">
+
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/dot" />
+
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,0,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,1,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,2,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.033">
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="35dp"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,0,o"
+        />
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,0,e" />
+
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,1,e" />
+
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="1,2,e" />
+
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.205">
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/dot" />
+
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,0,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,1,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button17"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,2,n" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.065">
+
+        <Button
+            android:id="@+id/button18"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="35dp"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,0,o" />
+
+        <Button
+            android:id="@+id/button19"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,0,e" />
+
+
+        <Button
+            android:id="@+id/button20"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,1,e" />
+
+
+        <Button
+            android:id="@+id/button21"
+            android:layout_width="@dimen/weight_vertical_button"
+            android:layout_height="@dimen/height_vertical_button"
+            android:layout_marginLeft="@dimen/margin_left_vertical_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,2,e" />
+
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.351">
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/dot" />
+
+
+        <Button
+            android:id="@+id/button22"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,0,s" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button23"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,1,s" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+
+        <Button
+            android:id="@+id/button24"
+            android:layout_width="@dimen/weight_horizontal_button"
+            android:layout_height="@dimen/height_horizontal_button"
+            android:layout_marginTop="@dimen/margin_top_horizontal_buttons"
+            android:background="#8b8b8b"
+            android:onClick="onClick"
+            android:tag="2,2,s" />
+
+        <ImageView
+            android:layout_width="@dimen/height_circle"
+            android:layout_height="@dimen/weight_circle"
+            android:src="@drawable/dot" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

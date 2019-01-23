@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivityHumanVsIntelligent"></activity>
+        <activity
+            android:name=".HumanVsIntelligent3X3"
+            android:label="@string/title_activity_human_vs_intelligent3_x3"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +29,7 @@
         <activity android:name=".HumanVsHuman" />
         <activity android:name=".Results" />
         <activity android:name=".HumanVsRandom" />
-        <activity android:name=".HumanVsIntelligent"></activity>
+        <activity android:name=".HumanVsIntelligent" />
     </application>
 
 </manifest>

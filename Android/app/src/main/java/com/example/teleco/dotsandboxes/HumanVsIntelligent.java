@@ -89,7 +89,9 @@ public class HumanVsIntelligent extends AppCompatActivity {
 
         TextView activePlayer = (TextView) findViewById(R.id.activePlayer);
         TextView player2Points = (TextView) findViewById(R.id.player2Points);
-        Edge edge = Minimax.getNextPlay(this.table, 2);
+
+        Tree tree = Minimax.constructTree(table);
+        Edge edge = tree.checkBest();
         String moveIntelligent = edge.toString();
         MapeButtons mapping = new MapeButtons();
         String buttonIdString = mapping.getIdButton(moveIntelligent);
