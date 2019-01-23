@@ -11,6 +11,9 @@ public class Edge {
 		this.horizontal = horizontal;
 	}
 
+	public Edge() {
+	}
+
 	public int getX() {
 		return x;
 	}
