@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Dots And Boxes</string>
+    <string name="human">Human Vs Human</string>
+    <string name="random_machine">Vs Random Machine</string>
+    <string name="intelligent">Vs Intelligent Machine</string>
+    <string name="player1_points">Player1: </string>
+    <string name="player2_points">Player2: </string>
+    <string name="title_activity_human_vs_intelligent3_x3">HumanVsIntelligent3X3</string>
+</resources>
+

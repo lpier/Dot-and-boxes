@@ -1,0 +1,19 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_left_points">15dp</dimen>
+    <dimen name="margin_left_buttons">15dp</dimen>
+
+    <dimen name="height_circle">20dp</dimen>
+    <dimen name="weight_circle">20dp</dimen>
+
+    <dimen name="margin_top_horizontal_buttons">3.5dp</dimen>
+    <dimen name="margin_left_vertical_buttons">32dp</dimen>
+
+    <dimen name="margin_top_points_box">22dp</dimen>
+    <dimen name="margin_left_points_box">35dp</dimen>
+
+    <dimen name="height_vertical_button">75dp</dimen>
+    <dimen name="weight_vertical_button">8dp</dimen>
+    <dimen name="height_horizontal_button">8dp</dimen>
+    <dimen name="weight_horizontal_button">75dp</dimen>
+</resources>
